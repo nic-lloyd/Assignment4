@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-variant: small-caps;
+}
+
+/*Landing page*/
+#landing-page {
+    background-image: url("./images/restaurant-bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    /* Paralax Background */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.title-bg {
+    background: #D0D0D3D4;
+    width: fit-content;
+    margin: auto;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.title {
+    text-align: center;
+    color: rgb(167, 50, 39);
+    font-size: 4em;
+    padding: 0px;
+}
+
+/* Nav slider */
+.nav-slider {
+    padding: 15px;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+}
+
+.line {
+    background: #D0D0D3D4;
+    height: 3px;   
+    margin: 5px;
+    width: 30px;
+    box-shadow: 3px 3px;
+}
+
+.line:nth-child(1) {
+    margin-top: 0px;
+}
+
+/* Nav slider section */
+.nav-slider-section {
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    transform: translateX(-100%);
+}
+
+.exit-nav-slider {
+    border: none;
+    outline: none;
+    float: right;
+    background: transparent;
+    color: #f1c40f;
+    font-size: 1.5em;
+    padding: 50px;
+}
+
+.nav-links-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-links-container li {
+    text-align: center;
+    padding: 10px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #eee;
+    font-size: 1.5em;
+}
+
+.openNav {
+    animation: openNav 0.5s forwards;
+}
+
+.exitNav {
+    animation: exitNav 0.5s forwards;
+}
+
+@keyframes openNav {
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes exitNav {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
