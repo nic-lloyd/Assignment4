@@ -8,7 +8,7 @@
     <title>plant practice</title>
     <style>
         h2 {
-            margin-top: 50%;
+            margin-top: 25%;
         }
 
         .buttons {
@@ -29,17 +29,17 @@
     </form>
 
     <section class="plantinfo">
-        <p class="name">Common Name: </p> <br>
-        <p class="genus">Genus: </p> <br>
-        <p class="confidence">Confidence: </p> <br> <br>
-        <a href="" class="moreinfo">more info</a>
+        <p class="name" id="name">Common Name: </p> <br>
+        <p class="genus" id="genus">Scientific Name: </p> <br>
+        <p class="confidence" id="conf">Confidence: </p> <br> <br>
+        <a href="" class="moreinfo" id="info">more info</a>
     </section>
 
     <section class="home">
         <a href="index.html">home</a>
     </section>
     <!--script for sending image to the plant.id API-->
-    <!-- <script type="text/javascript">
+    <script type="text/javascript">
         document.querySelector('button').onclick = function sendIdentification() {
             const files = [...document.querySelector('input[type=file]').files];
             const promises = files.map((file) => {
@@ -58,7 +58,7 @@
                 console.log(base64files)
 
                 const data = {
-                    api_key: "-- ask for one: https://forms.gle/yK1AY53YkYJjsc8X8 --",
+                    api_key: "wXrbfKaHwV2Y4lDWpHvFcw6AHvyVx6SYJn9h1o2LV4Lqif3KMJ",
                     images: base64files,
                     modifiers: ["crops_fast", "similar_images"],
                     plant_language: "en",
@@ -80,15 +80,35 @@
                     .then(response => response.json())
                     .then(data => {
                         console.log('Success:', data);
+                        updateCard(data);
                     })
                     .catch((error) => {
                         console.error('Error:', error);
                     });
+
+
+
+
             })
+
 
         };
 
-    </script> -->
+        function updateCard(data) {
+            var name = document.getElementById("name");
+            var sciName = document.getElementById("genus");
+            var conf = document.getElementById("conf");
+            var info = document.getElementById("info");
+            var prob = data.suggestions[0].probability.toFixed(2) * 100;
+
+            name.appendChild(document.createTextNode(data.suggestions[0].plant_details.common_names[0]));
+            sciName.appendChild(document.createTextNode(data.suggestions[0].plant_details.scientific_name));
+            conf.appendChild(document.createTextNode(prob + "%"));
+            info.setAttribute("href", data.suggestions[0].plant_details.wiki_description.citation);
+            console.log("success");
+        }
+
+    </script>
 </body>
 
 </html>

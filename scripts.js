@@ -54,7 +54,7 @@ console.log(JSON.parse(plantdata));
 var checkbtn = document.getElementById("checkbtn");
 if (checkbtn) {
     checkbtn.addEventListener("click", function () { check(document.getElementById("inputText").value) }, false);
-    checkbtn.addEventListener("keyup", function () {
+    checkbtn.addEventListener("keypress", function () {
         if (event.key == "Enter") {
             check(document.getElementById("inputText").value);
         }

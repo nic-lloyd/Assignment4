@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
     <title>plant practice</title>
+    <style>
+        .wrapper {
+            overflow-y: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -87,7 +92,7 @@
         let size = plantjson.length;
         var currentIndex = 0;
         console.log(JSON.parse(plantdata));
-        shuffle(plantdata);
+        plantjson = shuffle(plantjson);
         update(0);
 
         /**
@@ -96,7 +101,8 @@
         var checkbtn = document.getElementById("checkbtn");
         if (checkbtn) {
             checkbtn.addEventListener("click", function () { check(document.getElementById("inputText").value) }, false);
-            checkbtn.addEventListener("keyup", function () {
+            checkbtn.addEventListener("keypress", function () {
+                console.log(event.key);
                 if (event.key == "Enter") {
                     check(document.getElementById("inputText").value);
                 }
@@ -149,6 +155,7 @@
                 array[i] = array[j];
                 array[j] = temp;
             }
+            return array;
         }
 
         function update(index) {
