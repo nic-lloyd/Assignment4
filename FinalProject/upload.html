@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="styles.css">
     <title>plant practice</title>
     <style>
-        h2 {
-            margin-top: 25%;
-        }
-
         body {
             color: white;
         }
@@ -113,6 +109,13 @@
             var info = document.getElementById("info");
             var prob = data.suggestions[0].probability.toFixed(2) * 100;
 
+            if (prob >= 75) {
+                conf.setAttribute("style", "color: green");
+            } else if (prob > 40) {
+                conf.setAttribute("style", "color: yellow");
+            } else {
+                conf.setAttribute("style", "color: red");
+            }
             name.textContent = (data.suggestions[0].plant_details.common_names[0]);
             sciName.textContent = data.suggestions[0].plant_details.scientific_name
             conf.textContent = prob + "%";
