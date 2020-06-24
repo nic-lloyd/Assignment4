@@ -1,0 +1,43 @@
+[
+    {
+        "name": "plant name",
+        "piclocation": "start.jpg",
+        "genus": "genus",
+        "seasons": []
+    },
+    {
+        "name": "sunflower",
+        "piclocation": "sunflower.jpg",
+        "genus": "helianthus annuus",
+        "seasons": [
+            "summer"
+        ]
+    },
+    {
+        "name": "daisy",
+        "piclocation": "daisy.jpg",
+        "genus": "bellis",
+        "seasons": [
+            "summer"
+        ]
+    },
+    {
+        "name": "rose",
+        "piclocation": "rose.jpg",
+        "genus": "rosa",
+        "seasons": [
+            "summer",
+            "spring"
+        ]
+    },
+    {
+        "name": "tulip",
+        "piclocation": "tulip.jpg",
+        "genus": "tulipa",
+        "seasons": [
+            "summer",
+            "spring",
+            "fall"
+        ]
+    }
+]

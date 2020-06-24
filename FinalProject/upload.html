@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>plant practice</title>
+    <style>
+        h2 {
+            margin-top: 25%;
+        }
+
+        .buttons {
+            text-align: center;
+            padding: 15px;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 id="maintitle">plant practice</h2>
+    <img alt="your image" id="output" height="200" width="300">
+
+    <form>
+        <input type="file" onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
+        <button type="button">OK</button>
+    </form>
+
+    <section class="plantinfo">
+        <p class="name" id="name">Common Name: </p> <br>
+        <p class="genus" id="genus">Scientific Name: </p> <br>
+        <p class="confidence" id="conf">Confidence: </p> <br> <br>
+        <a href="" class="moreinfo" id="info">more info</a>
+    </section>
+
+    <section class="home">
+        <a href="index.html">home</a>
+    </section>
+    <!--script for sending image to the plant.id API-->
+    <script type="text/javascript">
+        document.querySelector('button').onclick = function sendIdentification() {
+            const files = [...document.querySelector('input[type=file]').files];
+            const promises = files.map((file) => {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        const res = event.target.result;
+                        console.log(res);
+                        resolve(res);
+                    }
+                    reader.readAsDataURL(file)
+                })
+            })
+
+            Promise.all(promises).then((base64files) => {
+                console.log(base64files)
+
+                const data = {
+                    api_key: "wXrbfKaHwV2Y4lDWpHvFcw6AHvyVx6SYJn9h1o2LV4Lqif3KMJ",
+                    images: base64files,
+                    modifiers: ["crops_fast", "similar_images"],
+                    plant_language: "en",
+                    plant_details: ["common_names",
+                        "url",
+                        "name_authority",
+                        "wiki_description",
+                        "taxonomy",
+                        "synonyms"]
+                };
+
+                fetch('https://api.plant.id/v2/identify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        updateCard(data);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                    });
+
+
+
+
+            })
+
+
+        };
+
+        function updateCard(data) {
+            var name = document.getElementById("name");
+            var sciName = document.getElementById("genus");
+            var conf = document.getElementById("conf");
+            var info = document.getElementById("info");
+            var prob = data.suggestions[0].probability.toFixed(2) * 100;
+
+            name.appendChild(document.createTextNode(data.suggestions[0].plant_details.common_names[0]));
+            sciName.appendChild(document.createTextNode(data.suggestions[0].plant_details.scientific_name));
+            conf.appendChild(document.createTextNode(prob + "%"));
+            info.setAttribute("href", data.suggestions[0].plant_details.wiki_description.citation);
+            console.log("success");
+        }
+
+    </script>
+</body>
+
+</html>
