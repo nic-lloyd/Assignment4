@@ -25,6 +25,7 @@ function test_input($data) {
 }
 ?>
 
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
@@ -44,6 +45,7 @@ function test_input($data) {
         color: black;
     }
 </style>
+</head>
 <p><span class="error">* required field</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
   Name: <input type="text" name="name">
