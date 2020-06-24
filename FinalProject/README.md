@@ -1,2 +1,2 @@
 # Assignment4
-Public Repository for Assignment 4 of Web Programming Section 1
+Public Repository for Web Programming Section 1 final project
